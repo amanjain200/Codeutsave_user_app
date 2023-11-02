@@ -25,13 +25,15 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: CustomAppBar2(
-        title: "Work Authenticator",
+        title: "Validating Case",
       ),
       body: Column(
         children: <Widget>[
           Expanded(
             flex: 4,
-            child: Image.file(File(widget.imagePath)),
+            child: Container(
+                padding: EdgeInsets.all(20),
+                child: Image.file(File(widget.imagePath))),
           ),
           // Text('wait for result'),
           SizedBox(

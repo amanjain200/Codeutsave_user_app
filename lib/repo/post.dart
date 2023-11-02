@@ -7,14 +7,17 @@ import 'package:http_parser/http_parser.dart';
 import 'package:codeutsav_1/display/dialog.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
+
 Future<String> upload(File imageFile) async {
   // open a bytestream
-  var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+  var stream =
+      new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
   // get file length
   var length = await imageFile.length();
-
+  print("aarif");
   // string to uri
-  var uri = Uri.parse("http://172.22.130.141:5000/upload");
+  var uri = Uri.parse("http://172.22.130.141:5000/eliminate");
+  //check status is true or not
 
   // create multipart request
   var request = new http.MultipartRequest("POST", uri);
@@ -33,26 +36,26 @@ Future<String> upload(File imageFile) async {
   print(response.statusCode);
 
   // listen for response
-  String ret="";
+  String ret = "";
   response.stream.transform(utf8.decoder).listen((value) {
     Map<dynamic, dynamic> jsonMap = json.decode(value);
-    String fl=jsonMap['pothole'];
+    String fl = jsonMap['pothole'];
 
-    if(fl=="true"){
+    if (fl == "true") {
       print('bhai ye toh hai');
-      global.fl=true;
-      global.text="Pothole not yet filled";
+      global.fl = true;
+      global.text = "Report Registered Succesfully";
+    } else if (fl == "false") {
+      global.fl = false;
+      global.text = "No Pothole found in Image";
     }
-    else if(fl=="false") {
-      global.fl=false;
-      global.text="Pothole filled successfully";
-    }
-      print(global.text);
-      print(value);
-
+    print('venkat');
+    print(global.text);
+    print(value);
   });
   return ret;
 }
+
 // Future<void> sendImage() async{
 //   final uri = Uri.parse('https://myendpoint.com');
 //   var request = new http.MultipartRequest('POST', uri);
@@ -61,14 +64,17 @@ Future<String> upload(File imageFile) async {
 //   request.files.add(httpImage);
 //   final response = await request.send();
 // }
-Future<void> sendDataToServer2(double lat,double lon) async {
-  var url = "https://vigyan-backend.onrender.com/accident/"; // Replace with your server's API URL
-  final data = {'latitude':'lat','longitude':'lon','type':'type'}; // Replace with your data
+Future<void> sendDataToServer2(double lat, double lon) async {
+  var url =
+      "https://vigyan-backend.onrender.com/accident/"; // Replace with your server's API URL
+  final data = {
+    'latitude': 'lat',
+    'longitude': 'lon',
+    'type': 'type'
+  }; // Replace with your data
   final response = await http.post(
     Uri.parse(url),
-    body: jsonEncode(
-        {'latitude':lon,'longitude':lat}
-    ),
+    body: jsonEncode({'latitude': lon, 'longitude': lat}),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -80,15 +86,19 @@ Future<void> sendDataToServer2(double lat,double lon) async {
     print('Failed to send data. Status code: ${response.statusCode}');
   }
 }
-Future<void> sendDataToServer(double lat,double lon,String type) async {
-  var url = "https://vigyan-backend.onrender.com/"; // Replace with your server's API URL
-  final data = {'latitude':'lat','longitude':'lon','type':'type'}; // Replace with your data
+
+Future<void> sendDataToServer(double lat, double lon, String type) async {
+  var url =
+      "https://vigyan-backend.onrender.com/"; // Replace with your server's API URL
+  final data = {
+    'latitude': 'lat',
+    'longitude': 'lon',
+    'type': 'type'
+  }; // Replace with your data
 
   final response = await http.post(
     Uri.parse(url),
-    body: jsonEncode(
-        {'latitude':lon,'longitude':lat,'type':'Pothole'}
-    ),
+    body: jsonEncode({'latitude': lon, 'longitude': lat, 'type': 'Pothole'}),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

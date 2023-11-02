@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
@@ -7,8 +8,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue, // Custom background color
-      padding: EdgeInsets.only(top: 24.0), // Add padding to the top for status bar
+      color: Colors.cyan.shade300, // Custom background color
+      padding:
+          EdgeInsets.only(top: 34.0), // Add padding to the top for status bar
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -36,9 +38,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
+
   @override
-  Size get preferredSize => Size.fromHeight(56); // Set the desired app bar height
+  Size get preferredSize =>
+      Size.fromHeight(56); // Set the desired app bar height
 }
+
 class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
@@ -48,7 +53,8 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.blue, // Custom background color
-      padding: EdgeInsets.only(top: 24.0), // Add padding to the top for status bar
+      padding:
+          EdgeInsets.only(top: 44.0), // Add padding to the top for status bar
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -76,7 +82,8 @@ class CustomAppBar2 extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-  @override
-  Size get preferredSize => Size.fromHeight(56); // Set the desired app bar height
-}
 
+  @override
+  Size get preferredSize =>
+      Size.fromHeight(56); // Set the desired app bar height
+}
